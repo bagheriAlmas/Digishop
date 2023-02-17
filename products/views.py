@@ -12,10 +12,10 @@ from rest_framework.response import Response
 class ProductListView(APIView):
     permission_classes = [IsAuthenticated]
     def get(self, request):
+
+        print(request.user.username)
         products = Product.objects.all()
         serializer = ProductSerializer(products, many=True, context={'request': request})
-        print(request.user)
-        print(request.auth)
         return Response(serializer.data)
 
 
